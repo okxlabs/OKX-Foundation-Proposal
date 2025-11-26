@@ -2,7 +2,7 @@
 title: <Governance Proposal Title, e.g., "Board Election Process Optimization">
 description: <One sentence describing the governance change objective>
 author: <List of proposal initiators>
-status: Draft
+status: Draft | Passed
 type: Governance  # Fixed type
 category: <Election Mechanism | Fund Management | Charter Revision | Technical Upgrade | Community Governance>  # Governance subcategory
 created: yyyy-mm-dd
