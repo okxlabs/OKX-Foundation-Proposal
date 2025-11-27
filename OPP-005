@@ -57,39 +57,75 @@ These conditions establish clear criteria for when contract suspension is warran
 
 **New Clause**:
 > Smart Contract Pause Mechanism Framework:
-> 1. **Security Organization-Triggered Pause**: Authorized security organizations may trigger pause when monitoring detects attacks or operational errors meeting pause criteria
-> 2. **Community Proposal-Triggered Pause**: Any eligible Foundation member may submit a proposal to pause contracts, which triggers pause upon passing governance vote
-> 3. Both mechanisms must specify target contract and pause duration
+> 1. **Reporter-Triggered Pause**: Authorized Reporters may trigger pause when monitoring detects attacks or operational errors meeting pause criteria, with automatic 24-hour recovery
+> 2. **Owner-Triggered Pause**: Owner (Foundation) may pause contracts through proposal and voting process, with configurable duration
+> 3. All pause actions must specify target contract
 > 4. All pause actions must be recorded on-chain for transparency
+> 5. Reporter pauses automatically expire after 24 hours unless extended by Owner through governance
 
 **Explanation**:
-This framework provides dual pathways for contract suspension, enabling both rapid response by security experts and community-driven emergency actions.
+This framework provides dual pathways for contract suspension: rapid response by Reporters with automatic recovery, and governance-controlled actions by Owner with flexible duration management.
 
-#### Security Organization-Triggered Pause
+#### Reporter-Triggered Pause Procedures
 
 **New Clause**:
-> Security Organization-Triggered Pause Procedures:
-> 1. **Authorized Parties**: Only security organizations with partnership agreements with the Foundation may trigger pauses when attacks or operational errors meeting pause criteria are detected
-> 2. **Standard Pause Duration**: Default pause duration is 24 hours (subject to review and adjustment)
-> 3. **Extension**: Pause extensions must be approved through proposal vote to prolong the pause period
-> 4. **Early Termination**: If special conditions require early termination, it may be executed after proposal and vote approval
-> 5. All security organization pause actions must be immediately reported to governance committee
+> Reporter-Triggered Pause Procedures:
+> 1. **Authorized Parties**: Only Reporters added by Owner through proposal and voting may trigger pauses when attacks or operational errors meeting pause criteria are detected
+> 2. **Automatic Pause Duration**: Reporter-triggered pauses are automatically set to 24 hours
+> 3. **Automatic Recovery**: Contracts automatically resume after 24 hours unless Owner extends the pause through governance
+> 4. **Risk Assessment Period**: During the 24-hour pause, Foundation assesses risks based on detection reports
+> 5. **Extension Process**: If risk assessment indicates continued threat, Owner must submit proposal to extend pause beyond 24 hours
+> 6. **Early Termination**: Owner may terminate pause early through proposal and vote approval if conditions allow
+> 7. All Reporter pause actions must be immediately reported and logged on-chain
 
 **Explanation**:
-This mechanism enables rapid response by trusted security partners while maintaining governance oversight through extension and termination procedures.
+This mechanism enables rapid response by authorized Reporters with automatic recovery safeguards, providing immediate protection while allowing Foundation time for risk assessment and informed decision-making.
 
-#### Community Proposal-Triggered Pause
+#### Owner-Triggered Pause Procedures
 
 **New Clause**:
-> Community Proposal-Triggered Pause Procedures:
-> 1. **Eligible Initiators**: Any member entity, individual, or party within the Foundation may submit a pause proposal upon identifying attacks or operational errors meeting pause criteria
+> Owner-Triggered Pause Procedures:
+> 1. **Authorized Party**: Only Owner (Foundation) may initiate pause through proposal and voting process
 > 2. **Proposal Requirements**: Proposals must specify target contract and proposed pause duration
 > 3. **Trigger Condition**: Pause is triggered when proposal passes governance vote
-> 4. **Extension**: Pause extensions must be approved through proposal vote to prolong the pause period
-> 5. **Early Termination**: If special conditions require early termination, it may be executed after proposal and vote approval
+> 4. **Duration Management**: Owner can set custom pause duration through governance vote
+> 5. **Extension**: Pause extensions must be approved through proposal vote to prolong the pause period
+> 6. **Resume**: Owner can resume contracts through proposal and vote approval
+> 7. All Owner pause actions require governance approval and are recorded on-chain
 
 **Explanation**:
-This mechanism empowers community members to initiate emergency responses through democratic governance processes, ensuring broad participation in security decisions.
+This mechanism provides Foundation with governance-controlled pause capabilities, ensuring democratic oversight and flexible duration management for complex security situations.
+
+#### Core Mechanism: Role-Based Access Control
+
+**New Clause**:
+> Core Mechanism - Role-Based Access Control:
+> 
+> The pause mechanism implements a two-role system with distinct responsibilities:
+> 
+> **Owner Role (Foundation)**:
+> 1. There is only one Owner, managed by the Foundation
+> 2. Owner can add or remove Reporter roles through proposal and voting process
+> 3. Owner can pause or resume contracts through proposal and voting process
+> 4. All Owner actions require governance approval via proposal and vote
+> 5. Owner has ultimate authority over contract pause/resume operations
+> 
+> **Reporter Role**:
+> 1. Reporters can pause contracts when security threats or operational errors are detected
+> 2. When a Reporter pauses a contract, the pause duration is automatically set to 24 hours
+> 3. After 24 hours, the contract automatically resumes unless extended by Owner through governance
+> 4. During the 24-hour pause period, Foundation will assess risk based on detection reports
+> 5. Foundation may extend the pause or take additional actions based on risk assessment
+> 6. Reporters cannot resume contracts; only Owner can resume through governance vote
+> 
+> **Automatic Recovery Mechanism**:
+> 1. Reporter-triggered pauses automatically expire after 24 hours
+> 2. Foundation must complete risk assessment within the 24-hour window
+> 3. If risk assessment indicates continued threat, Owner must submit proposal to extend pause
+> 4. If no extension proposal is passed, contract automatically resumes after 24 hours
+
+**Explanation**:
+This role-based mechanism provides a balanced approach to emergency response: Reporters enable rapid response to immediate threats with automatic recovery, while Owner maintains governance oversight and ultimate control through democratic processes. The 24-hour automatic recovery ensures contracts are not indefinitely paused while providing sufficient time for risk assessment.
 
 ---
 
@@ -132,17 +168,22 @@ This mechanism empowers community members to initiate emergency responses throug
 ## Technical Specifications
 
 ### Core Features
+- **Role-Based Access Control**: Two-role system (Owner and Reporter) with distinct permissions
 - **Pause Functionality**: Contract-level pause mechanism with emergency stop capabilities
-- **Authorization Management**: Multi-signature or role-based access control for pause triggers
-- **Duration Management**: Configurable pause duration with extension and early termination options
-- **Event Logging**: Comprehensive on-chain event logging for all pause actions
-- **Governance Integration**: Seamless integration with governance voting system
+- **Automatic Recovery**: Reporter-triggered pauses automatically resume after 24 hours
+- **Owner Management**: Single Owner (Foundation) with governance-controlled pause/resume and Reporter management
+- **Reporter Management**: Owner can add/remove Reporters through proposal and voting
+- **Duration Management**: Fixed 24-hour duration for Reporter pauses, configurable duration for Owner pauses
+- **Event Logging**: Comprehensive on-chain event logging for all pause actions and role changes
+- **Governance Integration**: Seamless integration with governance voting system for Owner actions
 
 ### Security Measures
-- **Access Control**: Strict authorization requirements for pause triggers
-- **Audit Trail**: Complete on-chain record of all pause actions and decisions
-- **Time Limits**: Default 24-hour pause duration with governance-controlled extensions
-- **Emergency Protocols**: Clear procedures for rapid response to security incidents
+- **Access Control**: Strict role-based authorization with Owner and Reporter separation
+- **Audit Trail**: Complete on-chain record of all pause actions, role changes, and governance decisions
+- **Time Limits**: Automatic 24-hour expiration for Reporter pauses to prevent indefinite suspension
+- **Risk Assessment Window**: 24-hour pause period allows Foundation to assess risks and make informed decisions
+- **Governance Oversight**: All Owner actions require proposal and vote approval
+- **Emergency Protocols**: Clear procedures for rapid response by Reporters with automatic recovery safeguards
 
 ---
 
@@ -173,5 +214,5 @@ This proposal is shared under [CC-BY-4.0](https://creativecommons.org/licenses/b
 
 ---
 
-*Last Updated: 2025-10-21*  
+*Last Updated: 2025-11-27*  
 *Proposal Status: Draft*
