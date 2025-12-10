@@ -1,0 +1,225 @@
+---
+title: OKX Labs Smart Contract Bug Bounty Program
+description: Establish comprehensive bug bounty program to incentivize security researchers to identify and report vulnerabilities in OKX Labs smart contracts
+status: Draft
+type: Governance
+category: Security Enhancement
+created: 2025-12-10
+requires: None
+proposal-id: OPP-006
+---
+
+## Proposal Summary
+
+**Core Objective**: Establish comprehensive bug bounty program to incentivize security researchers and community members to identify and responsibly disclose vulnerabilities in OKX Labs smart contracts, web interfaces, and related systems, enhancing overall security posture
+
+**Expected Outcomes**: Enhanced contract security through community-driven vulnerability discovery, reduced risk of exploits, improved user asset protection, strengthened ecosystem security standards
+
+---
+
+## Governance Status Analysis
+
+### Current Pain Points
+- **Issue 1**: Limited security testing resources and perspectives beyond internal audits
+- **Issue 2**: Lack of structured mechanism to incentivize external security researchers to report vulnerabilities responsibly
+- **Issue 3**: Potential vulnerabilities may remain undiscovered without broad community participation in security testing
+- **Issue 4**: Absence of standardized vulnerability disclosure and reward framework
+
+### Improvement Necessity
+- **Security Requirements**: Need for continuous security assessment beyond formal audits to identify evolving threats
+- **Community Engagement**: Security researchers and community members can provide valuable external security perspectives
+- **Industry Best Practices**: Leading DeFi protocols like Uniswap have successfully implemented bug bounty programs to enhance security ([Uniswap Security Documentation](https://docs.uniswap.org/contracts/v2/concepts/advanced-topics/security))
+- **Risk Mitigation**: Proactive vulnerability discovery and responsible disclosure reduces risk of exploits and asset losses
+
+---
+
+## Specific Governance Changes
+
+### Change Type
+- [x] Security Enhancement
+- [x] Mechanism Innovation
+
+### Detailed Change Content
+
+#### Bug Bounty Program Framework
+
+**New Clause**:
+> OKX Labs Bug Bounty Program Framework:
+> 1. Establish ongoing bug bounty program to incentivize responsible vulnerability disclosure
+> 2. Rewards allocated based on severity of bug disclosed and assets at risk
+> 3. Maximum reward cap to be determined based on vulnerability severity and impact
+> 4. All vulnerabilities must be reported through designated bug bounty platform
+> 5. Public recognition for security researchers who contribute to ecosystem security
+
+**Explanation**:
+This framework establishes a structured approach to community-driven security testing, incentivizing responsible disclosure while protecting user assets and ecosystem integrity.
+
+#### Program Scope
+
+**New Clause**:
+> Bug Bounty Program Scope:
+> The bug bounty program includes vulnerabilities and bugs in any contract deployed by OKX Labs as well as OKX Web3 interfaces. This includes production-deployed code from the following:
+> 1. Universal Token Locking System contracts
+> 2. Token Distribution System contracts
+> 3. Smart Contract Pause Mechanism contracts
+> 4. Governance contracts
+> 5. The OKX Web3 web interface
+> 6. The OKX Web3 mobile applications
+> 7. The OKX Web3 browser extensions
+> 8. Any other contracts deployed by OKX Labs where user funds are at risk
+> 
+> The following are not within the scope of the Program:
+> 1. Third party contracts that were not deployed by OKX Labs
+> 2. Issues already listed in the security audits for the contracts above
+> 3. Bugs in third party contracts or applications that use contracts deployed by OKX Labs
+> 4. Issues already known internally
+> 5. Social engineering attacks
+> 6. Physical attacks or infrastructure attacks
+
+**Explanation**:
+Clear scope definition ensures researchers focus on relevant vulnerabilities while excluding out-of-scope items, maximizing program effectiveness and efficiency.
+
+#### Vulnerability Disclosure Requirements
+
+**New Clause**:
+> Vulnerability Disclosure Requirements:
+> 1. Any vulnerability or bug discovered must be reported to the designated OKX Labs Bug Bounty Platform
+> 2. The vulnerability must not be disclosed publicly or to any other person, entity, or email address before OKX Labs has been notified, has fixed the issue, and has granted permission for public disclosure
+> 3. Disclosure must be made within 24 hours following discovery of the vulnerability
+> 4. A detailed report increases the likelihood of a reward and may increase the reward amount
+> 5. Reports must include:
+>    - Conditions on which reproducing the bug is contingent
+>    - Steps needed to reproduce the bug or, preferably, a proof of concept
+>    - Potential implications of the vulnerability being abused
+>    - Suggested remediation if applicable
+
+**Explanation**:
+These requirements ensure responsible disclosure practices, protecting users while allowing adequate time for vulnerability remediation before public disclosure.
+
+#### Reward Structure
+
+**New Clause**:
+> Bug Bounty Reward Structure:
+> 1. Rewards allocated based on severity classification: Critical, High, Medium, Low, Informational
+> 2. Reward amounts consider:
+>    - Severity of the vulnerability
+>    - Assets at risk
+>    - Impact on user funds and system integrity
+>    - Quality and completeness of the report
+> 3. Maximum reward amounts to be determined based on vulnerability severity and potential impact
+> 4. Rewards paid in stablecoins or native tokens as agreed upon
+> 5. Public recognition for security researchers who contribute significant findings (with permission)
+
+**Explanation**:
+This structure ensures fair compensation for security researchers while prioritizing critical vulnerabilities that pose the greatest risk to user assets.
+
+#### Eligibility and Recognition
+
+**New Clause**:
+> Eligibility and Recognition:
+> 1. Anyone who reports a unique, previously-unreported vulnerability that results in a change to the code or a configuration change and who keeps such vulnerability confidential until it has been resolved by OKX Labs engineers will be eligible for recognition
+> 2. Security researchers may choose to be publicly recognized for their contributions
+> 3. By submitting a report, researchers grant OKX Labs any and all rights, including intellectual property rights, needed to validate, mitigate, and disclose the vulnerability
+> 4. All reward decisions, including eligibility for and amounts of the rewards and the manner in which such rewards will be paid, are made at OKX Labs' sole discretion
+
+**Explanation**:
+These provisions ensure proper handling of vulnerability reports while protecting intellectual property and maintaining flexibility in reward allocation.
+
+---
+
+## Implementation Roadmap
+
+| Phase | Timeline | Key Tasks | Responsible Party | Deliverables | Success Criteria |
+|-------|----------|-----------|-------------------|--------------|------------------|
+| **Preparation Phase** | M1 | Bug bounty platform selection, program scope definition, reward structure design | Security Team + Operations Team | Selected platform, program documentation | Platform selection approved, documentation complete |
+| **Setup Phase** | M1-M2 | Platform configuration, scope documentation, reward structure implementation | Security Team | Configured platform, public documentation | Platform live, scope clearly defined |
+| **Launch Phase** | M2 | Program announcement, community outreach, researcher engagement | Marketing Team + Security Team | Public announcement, program launch | Program launched, initial submissions received |
+| **Ongoing Operations** | Continuous | Vulnerability triage, reward processing, researcher communication | Security Team | Processed reports, paid rewards | Average response time <48 hours, researcher satisfaction >80% |
+
+---
+
+## Community Impact Assessment
+
+| Stakeholders | Impact Analysis | Impact Level | Mitigation Measures | Responsible Party |
+|--------------|-----------------|--------------|---------------------|-------------------|
+| **Security Researchers** | Opportunity to earn rewards, contribute to ecosystem security | Highly Positive | Clear guidelines, fair reward structure, timely responses | Security Team |
+| **Contract Users** | Enhanced security through proactive vulnerability discovery | Highly Positive | Rapid vulnerability remediation, transparent disclosure | Security Team |
+| **OKX Labs** | Improved security posture, reduced exploit risk | Positive | Dedicated security team, structured response process | Security Team |
+| **Ecosystem Projects** | Higher security standards, reduced integration risks | Positive | Security best practices sharing, vulnerability advisories | Technical Committee |
+| **Token Holders** | Better asset protection, reduced hack risk | Positive | Regular security updates, incident response plans | Security Team |
+
+---
+
+## Risk Assessment
+
+| Risk | Probability | Impact | Mitigation Strategy |
+|------|-------------|--------|-------------------|
+| False positive reports | Medium | Low | Clear scope definition, detailed reporting requirements |
+| Reward disputes | Low | Medium | Transparent reward structure, clear eligibility criteria |
+| Vulnerability disclosure leaks | Low | High | Strict confidentiality requirements, secure reporting platform |
+| Program abuse | Low | Medium | Eligibility verification, scope limitations, reward caps |
+| Insufficient researcher participation | Medium | Medium | Competitive rewards, clear scope, responsive communication |
+
+---
+
+## Budget Allocation
+
+### Estimated Program Costs
+- **Platform Fees**: Annual subscription or per-report fees for bug bounty platform
+- **Reward Pool**: Variable based on vulnerability submissions and severity
+- **Operational Costs**: Security team time for triage, validation, and remediation
+- **Total Estimated Annual Budget**: To be determined based on platform selection and expected submission volume
+
+### Funding Sources
+- **Primary Source**: OKX Labs Security Budget
+- **Additional Sources**: Community treasury allocation (if approved through governance)
+
+---
+
+## Technical Specifications
+
+### Vulnerability Severity Classification
+- **Critical**: Vulnerabilities that could lead to complete loss of user funds or system compromise
+- **High**: Vulnerabilities that could lead to significant loss of user funds or major system disruption
+- **Medium**: Vulnerabilities that could lead to moderate loss of user funds or limited system disruption
+- **Low**: Vulnerabilities with minimal impact on user funds or system functionality
+- **Informational**: Issues that do not pose immediate risk but provide security insights
+
+### Reporting Platform Requirements
+- Secure submission channel
+- Encrypted communication
+- Vulnerability tracking and status updates
+- Reward processing capabilities
+- Researcher recognition features
+
+---
+
+## Voting Process
+
+1. **Proposal Publication**: 7-day publication after approval
+2. **Technical Review**: Days 1-7 technical committee review
+3. **Voting Start**: Voting begins on day 8
+4. **Governance Committee Voting**: Days 8-21
+5. **Voting End**: Voting ends on day 21
+6. **Result Announcement**: Results announced on day 22
+7. **Execution Preparation**: Days 23-37 preparation for execution
+8. **Formal Effect**: Officially effective on day 38
+
+---
+
+## Copyright Statement
+
+This proposal is shared under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license, allowing modification and distribution with attribution.
+
+---
+
+## Revision History
+
+| Version | Date | Revision Content | Reviser |
+|---------|------|------------------|---------|
+| v1.0 | 2025-12-10 | Initial version | Governance Committee Members |
+
+---
+
+*Last Updated: 2025-12-10*  
+*Proposal Status: Draft*
