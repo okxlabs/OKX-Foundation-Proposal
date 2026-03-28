@@ -79,6 +79,16 @@ These standards ensure maximum security validation through professional expertis
 **Explanation**:
 These mechanisms ensure transparent and efficient allocation of community resources for maximum security benefit.
 
+#### Designated Audit Firms
+
+**New Clause**:
+> Designated Audit Firms and Scope:
+> 1. **MixBytes** shall perform the security audit of **EVM aggregator** contracts
+> 2. **Zellic** shall perform the security audit of **Solana aggregator** contracts
+
+**Explanation**:
+Splitting EVM and Solana aggregator coverage across specialized firms aligns audit expertise with each execution environment.
+
 ---
 
 ## Implementation Roadmap
@@ -121,6 +131,13 @@ These mechanisms ensure transparent and efficient allocation of community resour
 **Resources**: 3 senior smart contract auditors full-time participation  
 **Total Cost**: $121,500 USDT
 
+### Designated Audit Firms
+
+| Audit Firm | Scope |
+|------------|-------|
+| **MixBytes** | EVM aggregator contracts |
+| **Zellic** | Solana aggregator contracts |
+
 ### Funding Sources
 - **Primary Source**: External Donations (100% - $121,500 USDT)
 - Community Treasury: 0%
@@ -142,8 +159,9 @@ This proposal is shared under [CC-BY-4.0](https://creativecommons.org/licenses/b
 | Version | Date | Revision Content | Reviser |
 |---------|------|------------------|---------|
 | v1.0 | 2025-10-21 | Initial version | Governance Committee Members |
+| v1.1 | 2026-03-28 | Add designated audit firms (MixBytes for EVM aggregator, Zellic for Solana aggregator) | Governance Committee Members |
 
 ---
 
-*Last Updated: 2025-10-21*  
+*Last Updated: 2026-03-28*  
 *Proposal Status: Passed*
