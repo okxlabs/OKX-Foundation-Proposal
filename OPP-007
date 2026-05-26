@@ -1,0 +1,124 @@
+
+---
+title: OKX Smart Wallet (EVM) Standardization Proposal
+description: Establish OKX Smart Wallet (EVM) as the canonical non-custodial account abstraction standard across the OKX ecosystem through a modular, independently audited, privilege-free smart wallet architecture supporting EIP-4337, EIP-7702, and relayer-based execution
+status: Passed
+type: Governance
+category: Technical Upgrade
+created: 2026-05-19
+requires: None
+proposal-id: OPP-007
+---
+
+## Proposal Summary
+
+**Core Objective**: Publish and standardize the OKX Smart Wallet — a modular, multi-protocol smart contract wallet supporting EIP-4337, EIP-7702, and relayer-based execution — as the canonical account abstraction foundation for the OKX ecosystem
+
+**Expected Outcomes**:
+1. **Standardize wallet** — Standardize wallet execution and authorization across ecosystem products, enable EIP-4337, relayer-based and EIP-7702 compatibility for all supported users
+2. **Seamless onboarding** — Reduce onboarding friction through gasless relayer/bundler execution and Passkey authentication
+3. **Multi authentication** — Deliver hardware-backed login via ECDSA and Passkey/WebAuthn validators, reducing seed-phrase dependency for end users
+4. **Security** — Provide a unified, auditable, and upgrade-safe wallet architecture
+5. **Cross-chain execution** — Enable sign-once, multi-chain execution via Merkle tree
+
+---
+
+## Governance Status Analysis
+
+### Current Pain Points
+- **Issue 1**: Lack of a standardized smart wallet interface across ecosystem products, resulting in fragmented user experiences
+- **Issue 2**: EOA users cannot access advanced account abstraction features such as gas sponsorship, session-key delegation, batch transactions without migrating to a smart wallet
+- **Issue 3**: No unified cross-chain signature scheme, requiring users to sign repeatedly for each chain
+
+### Improvement Necessity
+- **Compliance Requirements**: Regulatory and security standards mandate that all deployed smart wallet contracts undergo independent third-party security audits and are architected with no privileged owner addresses — eliminating single points of control, guaranteeing that no external EOA, admin key, or deployer address retains unilateral power to upgrade, pause, or drain user assets post-deployment
+- **Community Needs**: Ecosystem users require a unified, non-custodial smart wallet standard that enables gasless transactions, Passkey-based login, session-key delegation, and batch execution
+- **Technical Development**: Future ecosystem scalability requires a modular, upgradeable, and chain-agnostic account abstraction infrastructure capable of supporting EIP-4337, relayer-based and EIP-7702 standards
+
+---
+
+## Specific Governance Changes
+
+### Change Type
+- [x] Mechanism Innovation
+- [x] Other: Account Abstraction Infrastructure Standardization
+
+### Detailed Change Content
+
+#### Smart Wallet Standard
+
+**New Clause**:
+> The OKX ecosystem shall adopt OKX Smart Wallet as the canonical non-custodial smart wallet standard.
+>
+> All wallet deployments and integrations must follow a unified execution, authorization, and upgrade governance framework supporting:
+>
+> 1. EIP-4337 account abstraction execution
+> 2. EIP-7702 delegated execution compatibility
+> 3. Relayer-based gasless transaction execution
+> 4. Replay-protected cross-chain authorization
+> 5. Modular validator-based authentication
+> 6. Governance-scoped and auditable upgradeability
+>
+> All wallet contracts must remain independently audited, privilege-free, and non-custodial post-deployment.
+
+**Explanation**:
+This proposal establishes a unified wallet infrastructure layer for the OKX ecosystem.
+
+The proposed architecture reduces integration fragmentation, standardizes wallet security assumptions, simplifies cross-chain execution, and improves onboarding usability through account abstraction capabilities.
+
+The wallet framework additionally introduces replay-resistant cross-chain execution, Passkey/WebAuthn authentication, relayer-based gas abstraction, and modular validator systems while preserving full user asset custody.
+
+---
+
+## Implementation Roadmap
+
+| Phase | Timeline | Key Tasks | Responsible Party | Deliverables | Success Criteria |
+|-------|----------|-----------|-------------------|--------------|------------------|
+| **Preparation Phase** | M1 | Architecture finalization, EIP-4337/EIP-7702 alignment, audit scope definition | Core Team + Security Team | Finalized architecture document, audit scope | Pass compliance and governance review |
+| **Development Phase** | M1-M2 | Smart wallet contract development, validator integration, authorization framework implementation | Development Team | Smart contracts, SDK, test suite | Pass internal security review |
+| **Testing Phase** | M2-M3 | Multi-chain testnet deployment, Passkey testing, relayer simulation, replay protection validation | QA Team + Community | Integration reports, audit reports, testnet deployments | Zero critical vulnerabilities |
+| **Formal Implementation** | M3-M4 | Mainnet deployment, ecosystem integration, documentation release | Operations Team | Production contracts, SDK documentation | Successful deployment across supported chains |
+
+---
+
+## Community Impact Assessment
+
+| Stakeholders | Impact Analysis | Impact Level | Mitigation Measures | Responsible Party |
+|--------------|-----------------|--------------|---------------------|-------------------|
+| **End Users** | Gasless transactions, Passkey authentication, and batch execution significantly improve onboarding and wallet usability | Positive | User education, onboarding guides, recovery tooling | Product Team |
+| **EOA Users** | EIP-7702 compatibility enables advanced smart wallet features without mandatory migration | Positive | Clear delegation flows and migration documentation | Technical Committee |
+| **Developers** | Unified wallet standards reduce duplicated integration effort and simplify ecosystem development | Positive | SDK tooling, documentation, integration examples | Ecosystem Team |
+| **Relayers / Bundlers** | Standardized execution interfaces simplify sponsored transaction infrastructure | Positive | Reference implementations and integration support | Development Team |
+| **DeFi Users** | Granular on-chain allowance management reduces unlimited approval risks | Positive | Allowance dashboards and revocation tooling | Security Team |
+
+---
+
+## Risk Assessment
+
+| Risk | Probability | Impact | Mitigation Strategy |
+|------|-------------|--------|-------------------|
+| Smart contract vulnerability in modular architecture | Medium | High | Multiple independent security audits, formal verification of critical paths, bug bounty program |
+| EIP-7702 / EIP-4337 spec changes before finalization | Low | High | Track EIP authors' updates, maintain compatibility layer, phased deployment |
+| Passkey hardware incompatibility across devices | Medium | Medium | ECDSA fallback validator always available, device compatibility matrix published |
+| Cross-chain storage collision after upgrade | Low | High | ERC-7201 namespacing enforced in CI, upgrade simulation tests on fork |
+| Gas price volatility impacting relayer/bundler economics | High | Low | Gas optimization benchmarks per release, configurable relayer/bundler fee models |
+| Low ecosystem adoption of new wallet standard | Low | Medium | Partner integration program, SDK tooling, developer incentives |
+
+---
+
+## Copyright Statement
+
+This proposal is shared under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license, allowing modification and distribution with attribution.
+
+---
+
+## Revision History
+
+| Version | Date | Revision Content | Reviser |
+|---------|------|------------------|---------|
+| v1.0 | 2026-05-19 | Initial version | okxlabs |
+
+---
+
+*Last Updated: 2026-05-19*  
+*Proposal Status: Passed*
