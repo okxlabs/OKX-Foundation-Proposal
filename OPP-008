@@ -1,0 +1,157 @@
+---
+title: Solana RFQ V2 Publish Proposal
+description: Establish Solana RFQ V2 as a secure and efficient on-chain settlement infrastructure for request-for-quote trading
+status: Draft
+type: Governance
+category: Infrastructure Innovation
+created: 2026-08-10
+requires: None
+proposal-id: OPP-008
+---
+
+## Proposal Summary
+
+**Core Objective**: Publish Solana RFQ V2 as the standard on-chain settlement program for maker-signed, exact-input RFQ trades in the OKX ecosystem.
+
+**Expected Outcomes**: Deterministic multi-level price execution, active maker authorization for every fill, atomic token settlement, improved protection against stale quotes and slippage, and standardized integration with the OKX Solana DEX aggregator.
+
+---
+
+## Governance Status Analysis
+
+### Current Pain Points
+
+- **Issue 1**: RFQ quotes are generated off-chain and require a standardized on-chain mechanism to validate and settle them safely.
+- **Issue 2**: A single RFQ may contain multiple price levels, making consistent partial-level calculation and rounding difficult across integrations.
+- **Issue 3**: Composable Solana transactions may expose a market maker to unintended account usage if the signed transaction contains unrelated instructions.
+- **Issue 4**: Existing integrations need a common instruction format, event format, and error model for RFQ settlement.
+
+### Improvement Necessity
+
+- **Security Requirements**: Every fill should require active maker and taker signatures and enforce expiry, account ownership, liquidity, and slippage constraints on-chain.
+- **Integration Requirements**: The OKX Solana DEX aggregator requires a stable CPI-compatible RFQ settlement interface.
+- **Technical Development**: Integer-only sweep math and atomic token transfers provide deterministic results without maintaining an on-chain orderbook.
+
+---
+
+## Specific Governance Changes
+
+### Change Type
+
+- [x] Infrastructure Innovation
+
+### Detailed Change Content
+
+#### Solana RFQ V2 Settlement Framework
+
+**New Clause**:
+
+> The Solana RFQ V2 Settlement Framework shall establish the following principles:
+> 1. RFQ settlement shall use the `fill_exact_in` instruction for exact-input bid and ask trades.
+> 2. The taker and maker fill authority must actively sign every settlement transaction.
+> 3. RFQ price levels must be strictly ordered by implied price and contain non-zero base and quote amounts.
+> 4. The program must fully consume the requested input amount or revert the transaction.
+> 5. Quote expiry and the taker's minimum output must be enforced on-chain.
+> 6. Base and quote token transfers must execute atomically and emit a standardized fill event.
+
+**Explanation**:
+
+This framework creates one deterministic settlement path for RFQ trades while keeping quote generation and maker risk controls off-chain.
+
+#### Security and Integration Standards
+
+**New Clause**:
+
+> Security and Integration Standards for Solana RFQ V2:
+> 1. Protected maker accounts must not appear in another top-level instruction in the same transaction.
+> 2. The maker service must validate and simulate the complete transaction before signing, including the caller program, instruction data, account metas, and expected balance changes.
+> 3. All arithmetic must use checked integer operations; partial-level output must round down to avoid overpayment by the maker.
+> 4. Token-2022 mints with a non-zero transfer fee must be rejected because the credited amount would differ from the settlement calculation.
+> 5. The production program and aggregator integration must pass security review and testing before deployment.
+
+**Explanation**:
+
+These standards define the shared responsibility boundary: the on-chain program enforces settlement invariants, while the maker service validates the complete transaction before authorizing it.
+
+---
+
+## Implementation Roadmap
+
+| Phase | Timeline | Key Tasks | Responsible Party | Deliverables | Success Criteria |
+|-------|----------|-----------|-------------------|--------------|------------------|
+| **Preparation Phase** | M1 | Finalize instruction and event specification, integration design, and security scope | Core Team + Security Team | Technical specification, security review plan | Technical review completed |
+| **Development Phase** | M1 | Complete program, CLI, unit tests, formal proof harnesses, and aggregator integration | Development Team | Release candidate, IDL, integration code, test suite | All required tests pass |
+| **Security and Testing Phase** | M1-M2 | Conduct security review, adversarial testing, testnet deployment, and end-to-end maker signing tests | Security Team + QA Team | Security report, remediation record, testnet deployment | Zero unresolved critical or high-severity issues |
+| **Deployment Phase** | M2 | Deploy the verified program, publish documentation, and enable a controlled production rollout | Operations Team + Development Team | Production program, integration guide, monitoring and runbook | Successful settlement and complete event/balance reconciliation |
+
+---
+
+## Community Impact Assessment
+
+| Stakeholders | Impact Analysis | Impact Level | Mitigation Measures | Responsible Party |
+|--------------|-----------------|--------------|---------------------|-------------------|
+| **Users** | Receive atomic RFQ execution with expiry and slippage protection | Positive | Clear transaction errors and settlement documentation | Product Team |
+| **Market Makers** | Gain active authorization and deterministic settlement but must operate secure signing infrastructure | Positive | Full-transaction simulation, signing limits, and key-management controls | Market Making Team + Security Team |
+| **Integrators** | Gain a standardized CPI interface and fill event | Positive | Versioned IDL, examples, CLI, and integration tests | Development Team |
+| **Ecosystem Projects** | Can access RFQ liquidity through the OKX Solana DEX aggregator | Positive | Technical documentation and integration support | Technical Committee |
+
+---
+
+## Technical Specifications
+
+### Core Features
+
+- **Exact-input settlement**: The input amount must be fully filled or the transaction reverts.
+- **Two-sided trading**: `Bid` lets the taker pay quote tokens for base tokens; `Ask` lets the taker pay base tokens for quote tokens.
+- **Multi-level sweep**: The program walks a strictly ordered price ladder and supports a partial fill only at the final consumed level.
+- **Slippage and expiry protection**: `min_out_atoms` and `expire_at` are checked on-chain.
+- **Active maker authorization**: `fill_authority` is a required signer for each fill.
+- **Atomic settlement**: Both token transfers complete in one transaction or both revert.
+- **Standardized event**: `FillExactInEvent` records the RFQ ID, user, maker, side, token mints, input amount, and output amount.
+- **Aggregator compatibility**: The program is designed for CPI invocation by the OKX `dex-solana-v3` RFQ route.
+
+### Settlement and Token Rules
+
+- Price ordering is validated with `u128` cross multiplication rather than floating-point arithmetic.
+- Full levels settle at their declared atom amounts; partial levels round output down using integer division.
+- Zero input, empty or degenerate levels, insufficient liquidity, stale quotes, invalid ordering, arithmetic overflow, and insufficient output all revert.
+- Classic SPL Token is supported. Compatible Token-2022 mints are supported, except mints charging a non-zero transfer fee in the current epoch.
+- The program is stateless and does not store RFQ orders or user funds.
+
+### Verification Baseline
+
+- 23 Rust unit tests covering sweep math, price ordering, invalid inputs, slippage, liquidity, and transaction exclusivity.
+- 8 Anchor integration scenarios covering bid and ask settlement and key failure paths.
+- 14 Kani proof harnesses covering ordering, exact consumption, partial-fill rounding, monotonic output, and anti-dust behavior.
+
+---
+
+## Risk Assessment
+
+| Risk | Probability | Impact | Mitigation Strategy |
+|------|-------------|--------|-------------------|
+| Malicious or altered transaction presented to maker | Medium | High | Validate and simulate the complete transaction before signing; restrict approved caller programs |
+| Settlement math or rounding error | Low | High | Checked integer math, unit and integration tests, Kani proofs, and security review |
+| Stale or replayed RFQ | Medium | Medium | Short on-chain expiry, active maker signature, and off-chain RFQ ID controls |
+| Unsupported token behavior | Medium | High | Token compatibility checks and rejection of non-zero Token-2022 transfer fees |
+| Signing key compromise | Low | High | Secure key custody, authorization limits, monitoring, rotation, and emergency revocation |
+| Integration mismatch between aggregator and RFQ program | Medium | High | Versioned instruction schema, CPI integration tests, and staged deployment |
+
+---
+
+## Copyright Statement
+
+This proposal is shared under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license, allowing modification and distribution with attribution.
+
+---
+
+## Revision History
+
+| Version | Date | Revision Content | Reviser |
+|---------|------|------------------|---------|
+| v1.0 | 2026-08-10 | Initial version | OKX Labs |
+
+---
+
+*Last Updated: 2026-08-10*
+*Proposal Status: Passed*

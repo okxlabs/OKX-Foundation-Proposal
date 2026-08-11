@@ -12,5 +12,6 @@ The goal of the OKX Labs Foundation is to standardize and provide high-quality d
 | [OPP-005](./OPP-005) | Smart Contract Pause Mechanism | 2025-11-27 |
 | [OPP-006](./OPP-006) | OKX Labs Smart Contract Bug Bounty Program | 2025-12-10 |
 | [OPP-007](./OPP-007) | OKX Smart Wallet (EVM) Standardization Proposal | 2026-05-29 |
+| [OPP-008](./OPP-008) | Solana RFQ V2 Publish Proposal | 2026-08-10 |
 
 *Last updated dates are taken from each proposal’s `Last Updated` footer.*
